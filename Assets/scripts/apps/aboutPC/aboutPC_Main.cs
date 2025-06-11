@@ -33,7 +33,7 @@ public class aboutPC_Main : MonoBehaviour
         int vramamount = 0;
 
         int storage = 0;
-        computerCase computer = pcOs.computer;
+        computerCase computer = pcOs.hardDrive.curcase;
         if (computer != null)
         {
             osInfo = "Greensoft ® Tinglows\n";
@@ -111,9 +111,9 @@ public class aboutPC_Main : MonoBehaviour
             }
 
 
-            if (gameObject.GetComponentInParent<pcOS>().computer != null)
+            if (gameObject.GetComponentInParent<pcOS>().hardDrive.curcase != null)
             {
-                if (!gameObject.GetComponentInParent<pcOS>().computer.isPcON)
+                if (!gameObject.GetComponentInParent<pcOS>().hardDrive.curcase.isPcON)
                 {
                     windowOpened = false;
 

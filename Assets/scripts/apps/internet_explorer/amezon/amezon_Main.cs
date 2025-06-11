@@ -64,9 +64,9 @@ public class amezon_Main : MonoBehaviour
         {
             webay_MainObj.SetActive(false);
         }
-        if (gameObject.GetComponentInParent<pcOS>().computer != null)
+        if (gameObject.GetComponentInParent<pcOS>().hardDrive.curcase != null)
         {
-            if (!gameObject.GetComponentInParent<pcOS>().computer.isPcON)
+            if (!gameObject.GetComponentInParent<pcOS>().hardDrive.curcase.isPcON)
             {
                 webay_MainOpened = false;
             }

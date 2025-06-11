@@ -49,9 +49,9 @@ public class internet_explorer_Main : MonoBehaviour
             homePageObj.SetActive(false);
         }
 
-        if (gameObject.GetComponentInParent<pcOS>().computer != null)
+        if (gameObject.GetComponentInParent<pcOS>().hardDrive.curcase != null)
         {
-            if (!gameObject.GetComponentInParent<pcOS>().computer.isPcON)
+            if (!gameObject.GetComponentInParent<pcOS>().hardDrive.curcase.isPcON)
             {
                 browserOpened = false;
                 homePageOpened = true;

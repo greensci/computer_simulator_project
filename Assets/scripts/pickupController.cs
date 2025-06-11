@@ -136,7 +136,7 @@ public class pickupController : MonoBehaviour
                                         hitted.transform.gameObject.GetComponent<objectScript>().parent.transform.gameObject.GetComponent<objDetecter>().curcase.hdd3 = null;
                                         hitted.transform.gameObject.GetComponent<objectScript>().parent.transform.gameObject.GetComponent<objDetecter>().curcase.hddList.Remove(hitted.transform.gameObject);
                                     }
-                                    hitted.transform.gameObject.GetComponentInChildren<pcOS>().computer = null;
+                                    hitted.transform.gameObject.GetComponentInChildren<pcOS>().hardDrive.displayCam = null;
 
                                 }
                                 else if (hitted.transform.gameObject.GetComponent<objectScript>().type == objectScript.CompType.CPU)
@@ -161,6 +161,12 @@ public class pickupController : MonoBehaviour
                                 {
                                     hitted.transform.gameObject.GetComponent<objectScript>().parent.transform.gameObject.GetComponent<moboObjDetecter>().curMobo.hasCPUFan = false;
                                     hitted.transform.gameObject.GetComponent<objectScript>().parent.transform.gameObject.GetComponent<moboObjDetecter>().curMobo.cpuFan = null;
+                                }
+                                else if (hitted.transform.gameObject.GetComponent<objectScript>().type == objectScript.CompType.DVD_Drive)
+                                {
+                                    hitted.transform.gameObject.GetComponent<objectScript>().parent.transform.gameObject.GetComponent<objDetecter>().curcase.hasDVDDrive = false;
+                                    hitted.transform.gameObject.GetComponent<objectScript>().parent.transform.gameObject.GetComponent<objDetecter>().curcase.dvdDrive = null;
+                                    hitted.transform.gameObject.GetComponent<DiskDrive>().curcase = null;
                                 }
                                 else if (hitted.transform.gameObject.GetComponent<objectScript>().type == objectScript.CompType.GPU)
                                 {
@@ -220,7 +226,13 @@ public class pickupController : MonoBehaviour
 
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitted, pickupRange, objLayer))
                 {
-                    if (hitted.transform.gameObject.GetComponentInParent<computerCase>() != null)
+                    if (hitted.transform.gameObject.GetComponentInParent<DiskDrive>() != null)
+                    {
+                        hitted.transform.gameObject.GetComponentInParent<DiskDrive>().diskDriveOpened = !hitted.transform.gameObject.GetComponentInParent<DiskDrive>().diskDriveOpened;
+                        UnityEngine.Debug.Log("disk drive activatateted");
+                    }
+
+                    else if (hitted.transform.gameObject.GetComponentInParent<computerCase>() != null)
                     {
                         if (hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON)
                         {
@@ -236,7 +248,7 @@ public class pickupController : MonoBehaviour
                                     {
                                         if (!hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON)
                                         {
-                                            
+
                                             hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON = true;
                                         }
                                     }
@@ -411,8 +423,8 @@ public class pickupController : MonoBehaviour
                                     cp.currentMonitor.onLeComputahr = false;
                                     cp.currentMonitor.skipDiddy = false;
                                     if (cp.currentMonitor.currpcOS != null)
-                                        cp.currentMonitor.currpcOS.pcOSCanvas.worldCamera = null;
-                                    cp.pcOS.pcOSCanvas.worldCamera = null;
+                                        cp.currentMonitor.currpcOS.hardDrive.canvas.worldCamera = null;
+                                    cp.pcOS.hardDrive.canvas.worldCamera = null;
                                     cp.currentMonitor.currpcOS = null;
                                     cp.currentMonitor = null;
 
@@ -420,23 +432,23 @@ public class pickupController : MonoBehaviour
                             }
 
 
-                            currPCOS.GetComponentInParent<computerCase>().currentMonitor = monitor;
+                            currPCOS.hardDrive.curcase.currentMonitor = monitor;
 
 
 
 
 
 
-                            currPCOS.OScam = monitor.gameObject.GetComponentInChildren<Camera>();
-                            currPCOS.pcOSCanvas.worldCamera = monitor.gameObject.GetComponentInChildren<Camera>();
-                            currPCOS.computer = currPCOS.GetComponentInParent<computerCase>();
+                            currPCOS.hardDrive.displayCam = monitor.gameObject.GetComponentInChildren<Camera>();
+                            currPCOS.hardDrive.canvas.worldCamera = monitor.gameObject.GetComponentInChildren<Camera>();
+                            currPCOS.hardDrive.curcase = currPCOS.GetComponentInParent<computerCase>();
 
 
 
 
                             monitor.monitorScreen.material = monitor.monitorMat;
-                            currPCOS.gameObject.GetComponent<pcOS>().OScam = monitor.monitorCam;
-                            currPCOS.OScam.targetTexture = monitor.monitorTex;
+                            currPCOS.gameObject.GetComponent<pcOS>().hardDrive.displayCam = monitor.monitorCam;
+                            currPCOS.hardDrive.displayCam.targetTexture = monitor.monitorTex;
 
                             StartCoroutine(main.setInfoMessage("Monitor Connected!"));
 

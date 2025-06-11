@@ -12,6 +12,7 @@ public class personalization_Main : MonoBehaviour
     public GameObject focusedParent;
     public GameObject unfocusedParent;
     public GameObject minimizedParent;
+    public osDesktop desktopScript;
 
     void Start()
     {
@@ -34,9 +35,9 @@ public class personalization_Main : MonoBehaviour
         }
 
 
-        if (gameObject.GetComponentInParent<pcOS>().computer != null)
+        if (gameObject.GetComponentInParent<pcOS>().hardDrive.curcase != null)
         {
-            if (!gameObject.GetComponentInParent<pcOS>().computer.isPcON)
+            if (!gameObject.GetComponentInParent<pcOS>().hardDrive.curcase.isPcON)
             {
                 windowOpened = false;
 
@@ -74,6 +75,9 @@ public class personalization_Main : MonoBehaviour
             mainObj.transform.parent = focusedParent.transform;
         }
         windowOpened = true;
+    }
+    public void SetWallpaper(Sprite sprite){
+        desktopScript.currentWallpaper = sprite;
     }
 
 }

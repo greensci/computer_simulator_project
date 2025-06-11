@@ -10,10 +10,8 @@ public class pcOS : MonoBehaviour
     public OperativeSystemEdition operativeSystemEdition;
     public enum OperativeSystemEdition { Professional, Home };
 
-    public Camera OScam;
-    public RenderTexture pcOSTex;
-    public Canvas pcOSCanvas;
-    public computerCase computer;
+    
+public hardDrive hardDrive;
     public GameObject off;
 
 
@@ -64,8 +62,8 @@ public class pcOS : MonoBehaviour
     }
     void PlaySound(AudioClip clip)
     {
-        if (computer.pcAudio != null)
-            computer.pcAudio.PlayOneShot(clip);
+        if (hardDrive.curcase.pcAudio != null)
+            hardDrive.curcase.pcAudio.PlayOneShot(clip);
     }
 
     // Update is called once per frame
@@ -78,9 +76,9 @@ public class pcOS : MonoBehaviour
         {
             if (startSequence)
             {
-                if (computer != null)
+                if (hardDrive.curcase != null)
                 {
-                    if (computer.isPcON)
+                    if (hardDrive.curcase.isPcON)
                     {
 
 
@@ -102,7 +100,7 @@ public class pcOS : MonoBehaviour
         {
             if (startSequence)
             {
-                if (computer.isPcON)
+                if (hardDrive.curcase.isPcON)
                 {
                     startSequence = false;
                     blackBars.SetActive(true);
@@ -116,17 +114,17 @@ public class pcOS : MonoBehaviour
                 exitBtn.SetActive(false);
             }
         }
-        if (computer != null)
+        if (hardDrive.curcase != null)
         {
-            if (!computer.isPcON)
+            if (!hardDrive.curcase.isPcON)
             {
                 if (pickupController.isOnPCOS)
                 {
                   
                     CloseOS();
                 }
-                if(computer.currentMonitor != null)
-                    computer.currentMonitor.allowEnter = false;
+                if(hardDrive.curcase.currentMonitor != null)
+                    hardDrive.curcase.currentMonitor.allowEnter = false;
 
                 onBSOD = false;
                 BSOD.SetActive(false);
@@ -141,8 +139,8 @@ public class pcOS : MonoBehaviour
                 blackBars.SetActive(false);
                 shuttingDown.SetActive(false);
                 booted = false;
-                if (computer.pcAudio != null)
-                    computer.pcAudio.Stop();
+                if (hardDrive.curcase.pcAudio != null)
+                    hardDrive.curcase.pcAudio.Stop();
 
                 //too lazy to optimize this
 
@@ -160,8 +158,8 @@ public class pcOS : MonoBehaviour
             else
             {
                 off.SetActive(false);
-                if(computer.currentMonitor != null)
-                    computer.currentMonitor.allowEnter = true;
+                if(hardDrive.curcase.currentMonitor != null)
+                    hardDrive.curcase.currentMonitor.allowEnter = true;
             }
         }
         else
@@ -186,25 +184,25 @@ public class pcOS : MonoBehaviour
         if (pickupController.isOnPCOS)
         {
             exitBtn.SetActive(true);
-            pcOSCanvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1280, 720);
+            hardDrive.canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1280, 720);
         }
         else
         {
-            if (computer != null)
+            if (hardDrive.curcase != null)
             {
 
-                if (computer.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
-                    pcOSCanvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(960, 720);
+                if (hardDrive.curcase.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
+                    hardDrive.canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(960, 720);
                 else
-                    pcOSCanvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1280, 720);
+                    hardDrive.canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1280, 720);
 
                 exitBtn.SetActive(false);
             }
         }
-        if (computer != null)
+        if (hardDrive.curcase != null)
         {
 
-            if (computer.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
+            if (hardDrive.curcase.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
             {
                 GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("OSScalable");
 
@@ -264,7 +262,7 @@ public class pcOS : MonoBehaviour
     }
     void loadingScreen()
     {
-        if (computer.isPcON)
+        if (hardDrive.curcase.isPcON)
         {
 
             if (!onBSOD)
@@ -274,23 +272,23 @@ public class pcOS : MonoBehaviour
                 if (operativeSystemType != OperativeSystem.No_Boot_Device)
                 {
                     black.SetActive(false);
-                    float timeme = (100 / computer.cpu.GetComponent<objectScript>().objSpeed) / 14;
-                    if (computer.ram1 != null && computer.ram2 != null)
+                    float timeme = (100 / hardDrive.curcase.cpu.GetComponent<objectScript>().objSpeed) / 17;
+                    if (hardDrive.curcase.ram1 != null && hardDrive.curcase.ram2 != null)
                     {
-                        timeme += (1000 / computer.ram1.GetComponent<objectScript>().objSpeed) / 2;
-                        timeme += (4096 / computer.ram1.GetComponent<objectScript>().ramSize) / 24;
-                        timeme += (1000 / computer.ram2.GetComponent<objectScript>().objSpeed) / 2;
-                        timeme += (4096 / computer.ram2.GetComponent<objectScript>().ramSize) / 24;
+                        timeme += (1000 / hardDrive.curcase.ram1.GetComponent<objectScript>().objSpeed) / 2;
+                        timeme += (4096 / hardDrive.curcase.ram1.GetComponent<objectScript>().ramSize) / 24;
+                        timeme += (1000 / hardDrive.curcase.ram2.GetComponent<objectScript>().objSpeed) / 2;
+                        timeme += (4096 / hardDrive.curcase.ram2.GetComponent<objectScript>().ramSize) / 24;
                     }
-                    else if (computer.ram1 != null && computer.ram2 == null)
+                    else if (hardDrive.curcase.ram1 != null && hardDrive.curcase.ram2 == null)
                     {
-                        timeme += (1000 / computer.ram1.GetComponent<objectScript>().objSpeed);
-                        timeme += (4096 / computer.ram1.GetComponent<objectScript>().ramSize) / 20;
+                        timeme += (1000 / hardDrive.curcase.ram1.GetComponent<objectScript>().objSpeed);
+                        timeme += (4096 / hardDrive.curcase.ram1.GetComponent<objectScript>().ramSize) / 20;
                     }
-                    else if (computer.ram1 == null && computer.ram2 != null)
+                    else if (hardDrive.curcase.ram1 == null && hardDrive.curcase.ram2 != null)
                     {
-                        timeme += (1000 / computer.ram2.GetComponent<objectScript>().objSpeed);
-                        timeme += (4096 / computer.ram2.GetComponent<objectScript>().ramSize) / 20;
+                        timeme += (1000 / hardDrive.curcase.ram2.GetComponent<objectScript>().objSpeed);
+                        timeme += (4096 / hardDrive.curcase.ram2.GetComponent<objectScript>().ramSize) / 20;
                     }
 
 
@@ -324,7 +322,7 @@ public class pcOS : MonoBehaviour
     {
         if (!onBSOD)
         {
-            if (computer.isPcON)
+            if (hardDrive.curcase.isPcON)
             {
                 if (!booted)
                 {
@@ -340,9 +338,9 @@ public class pcOS : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
 
-        if (computer != null)
+        if (hardDrive.curcase != null)
         {
-            if (computer.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
+            if (hardDrive.curcase.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
             {
                 blackBars.SetActive(true);
             }
@@ -359,15 +357,15 @@ public class pcOS : MonoBehaviour
         float timeme = 0f;
         if (operativeSystemType == OperativeSystem.Tinglows_XP)
         {
-            timeme = (100 / computer.cpu.GetComponent<objectScript>().objSpeed) / 16f;
+            timeme = (100 / hardDrive.curcase.cpu.GetComponent<objectScript>().objSpeed) / 16f;
         }
         else if (operativeSystemType == OperativeSystem.Tinglows_2000)
         {
-            timeme = (100 / computer.cpu.GetComponent<objectScript>().objSpeed) / 20f;
+            timeme = (100 / hardDrive.curcase.cpu.GetComponent<objectScript>().objSpeed) / 20f;
         }
         else
         {
-            timeme = (100 / computer.cpu.GetComponent<objectScript>().objSpeed) / 20f;
+            timeme = (100 / hardDrive.curcase.cpu.GetComponent<objectScript>().objSpeed) / 20f;
         }
         if (timeme < 5f)
             timeme = 5f;
@@ -388,10 +386,10 @@ public class pcOS : MonoBehaviour
     }
     public void CloseOS()
     {
-        if (computer.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
-            pcOSCanvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(960, 720);
-        OScam.targetTexture = OScam.gameObject.GetComponentInParent<computerMonitor>().monitorTex;
-        OScam.targetDisplay = 1;
+        if (hardDrive.curcase.currentMonitor.monitorRatio == computerMonitor.Ratio.Square)
+            hardDrive.canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(960, 720);
+        hardDrive.displayCam.targetTexture = hardDrive.displayCam.gameObject.GetComponentInParent<computerMonitor>().monitorTex;
+        hardDrive.displayCam.targetDisplay = 1;
         pickupController.isOnPCOS = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

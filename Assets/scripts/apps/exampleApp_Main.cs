@@ -33,9 +33,9 @@ public class exampleApp_Main : MonoBehaviour
         }
       
 
-        if (gameObject.GetComponentInParent<pcOS>().computer != null)
+        if (gameObject.GetComponentInParent<pcOS>().hardDrive.curcase != null)
         {
-            if (!gameObject.GetComponentInParent<pcOS>().computer.isPcON)
+            if (!gameObject.GetComponentInParent<pcOS>().hardDrive.curcase.isPcON)
             {
                 windowOpened = false;
                 

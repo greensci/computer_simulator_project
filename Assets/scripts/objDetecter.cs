@@ -89,7 +89,8 @@ public class objDetecter : MonoBehaviour
                         pickupController.pickedObject = false;
                         pickupController.heldObjRB = null;
                     }
-                    curcase.mobo = other.gameObject;
+                    curcase.dvdDrive = other.gameObject;
+                    other.gameObject.GetComponent<DiskDrive>().curcase = curcase;
                     PlaySound(0);
                 }
                 else

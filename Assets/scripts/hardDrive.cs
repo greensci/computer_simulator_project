@@ -12,8 +12,16 @@ public class hardDrive : MonoBehaviour
     public int hdSize = 0;
     public bool isBootable = false;
     public bool hasOS = false;
+    public GameObject bootSection;
+    public GameObject storageSection;
+    public computerCase curcase;
+    public GameObject noBootableSystemError;
+    public Canvas canvas;
+    public Camera displayCam;
+    public RenderTexture displayTex;
     void Start()
     {
+
         if (hdName == "")
         {
             string charTable = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -38,6 +46,10 @@ public class hardDrive : MonoBehaviour
 
         }
 
+    }
+    void Update()
+    {
+        curcase = GetComponentInParent<computerCase>();
     }
 
 }

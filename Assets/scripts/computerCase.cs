@@ -49,7 +49,7 @@ public class computerCase : MonoBehaviour
   public GameObject gpu2;
   public GameObject gpu3;
   public GameObject cpuFan;
-    public GameObject dvdDrive;
+  public GameObject dvdDrive;
   public GameObject onLight;
   public List<GameObject> hddList;
 
@@ -92,7 +92,7 @@ public class computerCase : MonoBehaviour
       hasRAM1 = mobo.GetComponent<moboScript>().hasRAM1;
       hasRAM2 = mobo.GetComponent<moboScript>().hasRAM2;
       hasCPUFan = mobo.GetComponent<moboScript>().hasCPUFan;
-    
+
     }
     else
     {
@@ -112,7 +112,7 @@ public class computerCase : MonoBehaviour
       hasRAM2 = false;
       hasCPUFan = false;
     }
-      
+
     if (isPcON)
     {
 
@@ -247,6 +247,21 @@ public class computerCase : MonoBehaviour
             pcOS.onBSOD = true;
           }
         }
+
+        if (hadDVDDrive)
+        {
+          if (!hasDVDDrive)
+          {
+            pcOS.onBSOD = true;
+          }
+        }
+        if (!hadDVDDrive)
+        {
+          if (hasDVDDrive)
+          {
+            pcOS.onBSOD = true;
+          }
+        }
         if (!hasCPUFan)
         {
           if (!cpuFanChecked)
@@ -286,7 +301,7 @@ public class computerCase : MonoBehaviour
       }*/
 
       onLight.SetActive(false);
-
+      hadDVDDrive = hasDVDDrive;
       hadGPU1 = hasGPU1;
       hadGPU2 = hasGPU2;
       hadGPU3 = hasGPU3;
@@ -341,10 +356,10 @@ public class computerCase : MonoBehaviour
       {
 
         pcOS = hddList[0].GetComponentInChildren<pcOS>();
-        pcOS.computer = this;
-        pcOS.pcOSCanvas.worldCamera = currentMonitor.monitorCam;
+        pcOS.hardDrive.curcase = this;
+        pcOS.hardDrive.canvas.worldCamera = currentMonitor.monitorCam;
 
-        noOS.pcOSCanvas.worldCamera = null;
+        noOS.hardDrive.canvas.worldCamera = null;
 
 
       }
@@ -353,7 +368,7 @@ public class computerCase : MonoBehaviour
 
         if (pcOS != null)
         {
-          pcOS.pcOSCanvas.worldCamera = null;
+          pcOS.hardDrive.canvas.worldCamera = null;
         }
 
 
@@ -363,13 +378,17 @@ public class computerCase : MonoBehaviour
 
         pcOS = noOS;
       }
+      /*if (dvdDrive.GetComponent<DiskDrive>().hasDisc)
+      {
+       
+      }*/
       if (hasRAM1 || hasRAM2)
       {
 
       }
       else
       {
-        pcOS.pcOSCanvas.worldCamera = null;
+        pcOS.hardDrive.canvas.worldCamera = null;
       }
 
 

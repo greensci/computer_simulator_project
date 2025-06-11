@@ -54,7 +54,7 @@ public class computerMonitor : MonoBehaviour
         else
         {
             if (currpcOS != null)
-                currpcOS.pcOSCanvas.worldCamera = null;
+                currpcOS.hardDrive.canvas.worldCamera = null;
         }
 
 
@@ -66,7 +66,7 @@ public class computerMonitor : MonoBehaviour
                 onLeComputahr = true;
                 currpcOS = cp.pcOS;
                 skipDiddy = true;
-                currpcOS.OScam = monitorCam;
+                currpcOS.hardDrive.displayCam = monitorCam;
                 allowEnter = true;
 
 
@@ -76,10 +76,10 @@ public class computerMonitor : MonoBehaviour
                     {
                         if (mn.currpcOS != null)
                         {
-                            if (mn.currpcOS.pcOSCanvas.worldCamera == monitorCam)
+                            if (mn.currpcOS.hardDrive.canvas.worldCamera == monitorCam)
                             {
 
-                                Debug.Log(mn.currpcOS.pcOSCanvas.worldCamera + " = " + monitorCam);
+                                Debug.Log(mn.currpcOS.hardDrive.canvas.worldCamera + " = " + monitorCam);
                                 mn.currpcOS = null;
                             }
                         }
@@ -104,20 +104,20 @@ public class computerMonitor : MonoBehaviour
             if (currpcOS != null)
             {
                 Debug.Log("monitor is for some reason off andn different to null");
-                currpcOS.pcOSCanvas.worldCamera = null;
+                currpcOS.hardDrive.canvas.worldCamera = null;
             }
             currpcOS = null;
         }
         else
         {
-            currpcOS.pcOSCanvas.worldCamera = monitorCam;
+            currpcOS.hardDrive.canvas.worldCamera = monitorCam;
         }
 
 
         skipDiddy = false;
         if (clear)
         {
-            currpcOS.pcOSCanvas.worldCamera = null;
+            currpcOS.hardDrive.canvas.worldCamera = null;
             clear = false;
         }
         if (currpcOS != null)
@@ -136,13 +136,13 @@ public class computerMonitor : MonoBehaviour
             }
             else
             {
-                currpcOS.pcOSCanvas.worldCamera = null;
+                currpcOS.hardDrive.canvas.worldCamera = null;
                 allowEnter = false;
             }
 
             if (!currpcOS.GetComponentInParent<computerCase>().mobo.GetComponent<objectScript>().hasiGPU && currpcOS.GetComponentInParent<computerCase>().hadGPU1 == false && currpcOS.GetComponentInParent<computerCase>().hadGPU2 == false && currpcOS.GetComponentInParent<computerCase>().hadGPU3 == false)
             {
-                currpcOS.pcOSCanvas.worldCamera = null;
+                currpcOS.hardDrive.canvas.worldCamera = null;
                 allowEnter = false;
             }
         }
