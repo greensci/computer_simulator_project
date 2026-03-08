@@ -15,6 +15,7 @@ public class debugSpawner : MonoBehaviour
     public Transform target;
 
     void Update(){
+        /*
         if(Input.GetKeyDown(KeyCode.F1)){
             Instantiate(casePrefab, target.transform.position, Quaternion.identity);
         }
@@ -41,7 +42,7 @@ public class debugSpawner : MonoBehaviour
         }
          if(Input.GetKeyDown(KeyCode.F9)){
             Instantiate(monitorPrefab, target.transform.position, Quaternion.identity);
-        }
+        }*/
 
 
     }

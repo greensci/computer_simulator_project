@@ -23,6 +23,7 @@ public class computerMonitor : MonoBehaviour
     public bool clear = false;
 
 
+
     void Start()
     {
         if (monitorRatio == Ratio.Square)
@@ -103,7 +104,7 @@ public class computerMonitor : MonoBehaviour
         {
             if (currpcOS != null)
             {
-                Debug.Log("monitor is for some reason off andn different to null");
+                Debug.Log("Monitor is for some reason off and different to null");
                 currpcOS.hardDrive.canvas.worldCamera = null;
             }
             currpcOS = null;

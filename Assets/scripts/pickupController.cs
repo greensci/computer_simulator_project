@@ -68,7 +68,7 @@ public class pickupController : MonoBehaviour
         if (!isOnPCOS)
         {
             uiObj.SetActive(true);
-            if (Input.GetMouseButtonDown(0))
+            if (GameControls.inPrimary)
             {
 
                 if (heldObj == null)
@@ -208,151 +208,29 @@ public class pickupController : MonoBehaviour
 
                     }
                 }
-                else
-                {
-                    pickedObject = false;
-                }
 
+
+
+
+
+
+
+
+            }
+            else
+            {
+                pickedObject = false;
             }
         }
         else
         {
             uiObj.SetActive(false);
         }
-        if (!pickedObject)
+        if (GameControls.inPrimaryTrigger)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (linkmode)
             {
 
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitted, pickupRange, objLayer))
-                {
-                    if (hitted.transform.gameObject.GetComponentInParent<DiskDrive>() != null)
-                    {
-                        hitted.transform.gameObject.GetComponentInParent<DiskDrive>().diskDriveOpened = !hitted.transform.gameObject.GetComponentInParent<DiskDrive>().diskDriveOpened;
-                        UnityEngine.Debug.Log("disk drive activatateted");
-                    }
-
-                    else if (hitted.transform.gameObject.GetComponentInParent<computerCase>() != null)
-                    {
-                        if (hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON)
-                        {
-                            hitted.transform.gameObject.GetComponentInParent<computerCase>().shutdownPc();
-                        }
-                        else
-                        {
-                            if (hitted.transform.gameObject.GetComponentInParent<computerCase>().hasMOBO)
-                            {
-                                if (hitted.transform.gameObject.GetComponentInParent<computerCase>().hasCPU)
-                                {
-                                    if (hitted.transform.gameObject.GetComponentInParent<computerCase>().hasPowerSupply)
-                                    {
-                                        if (!hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON)
-                                        {
-
-                                            hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON = true;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        StartCoroutine(main.setErrorMessage("Can't turn on the PC without a Power Supply!"));
-                                        Debug.Log("Can't turn on the PC without a Power Supply!");
-                                    }
-                                }
-                                else
-                                {
-                                    StartCoroutine(main.setErrorMessage("Can't turn on the PC without a CPU!"));
-                                    Debug.Log("Can't turn on the PC without a CPU!");
-                                }
-                            }
-                            else
-                            {
-                                StartCoroutine(main.setErrorMessage("Can't turn on the PC without a Motherboard!"));
-                                Debug.Log("Can't turn on the PC without a Motherboard!");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("this is not a computer!");
-                        StartCoroutine(main.setErrorMessage("This is not a computer!"));
-                    }
-                }
-            }
-
-            if (GameControls.inSecondary)
-            {
-
-
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitted, pickupRange, objLayer))
-                {
-
-                    if (hitted.transform.gameObject.tag == "ComputerOS")
-                    {
-                        if (hitted.transform.gameObject.GetComponent<computerMonitor>().onLeComputahr == true)
-                        {
-                            if (hitted.transform.gameObject.GetComponent<computerMonitor>().allowEnter == true)
-                            {
-
-
-                                /*if (hitted.transform.GetComponent<computerMonitor>().monitorScreen.material != replacePcOSMat)
-                                {
-                                    //hitted.transform.gameObject.GetComponentInChildren<Camera>().targetTexture = pcOSTex;
-                                    //hitted.transform.gameObject.GetComponentInChildren<Camera>().targetTexture = null;
-                                    hitted.transform.gameObject.GetComponentInChildren<Camera>().targetDisplay = 0;
-                                    */
-                                //hitted.transform.GetComponent<computerMonitor>().currPCOS = hitted.transform.gameObject.GetComponentInChildren<Camera>();
-                                isOnPCOS = true;
-                                Cursor.visible = true;
-                                Cursor.lockState = CursorLockMode.None;
-                                hitted.transform.GetComponent<computerMonitor>().monitorCam.targetTexture = null;
-                                hitted.transform.GetComponent<computerMonitor>().monitorCam.targetDisplay = 0;
-
-                                Debug.Log("entered to os!");
-                            }
-                        }
-
-
-                    }
-                }
-
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (linkmode)
-                {
-                    linkmode = false;
-                    linkStep = 0;
-                    StartCoroutine(main.setInfoMessage("Link Mode deactivated."));
-                }
-                else
-                {
-                    linkmode = true;
-                    StartCoroutine(main.setInfoMessage("Link Mode activated.\nChoose a computer."));
-                }
-
-
-            }
-
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                if (disarmMode)
-                {
-                    disarmMode = false;
-                    StartCoroutine(main.setInfoMessage("Disarm Mode deactivated."));
-                }
-                else
-                {
-                    StartCoroutine(main.setInfoMessage("Disarm Mode activated."));
-                    disarmMode = true;
-                }
-            }
-        }
-        if (linkmode)
-        {
-
-            if (Input.GetMouseButtonDown(0))
-            {
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitted, pickupRange, objLayer))
                 {
                     if (linkStep == 0)
@@ -488,20 +366,135 @@ public class pickupController : MonoBehaviour
                         linkStep = 0;
                     }
 
+
                 }
             }
         }
-        if (!GameControls.inPrimary)
+        if (!pickedObject)
         {
-            pickedObject = false;
+            if (GameControls.inUse)
+            {
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitted, pickupRange, objLayer))
+                {
 
+                    if (hitted.transform.gameObject.tag == "ComputerOS")
+                    {
+                        if (hitted.transform.gameObject.GetComponent<computerMonitor>().onLeComputahr == true)
+                        {
+                            if (hitted.transform.gameObject.GetComponent<computerMonitor>().allowEnter == true)
+                            {
+
+
+                                /*if (hitted.transform.GetComponent<computerMonitor>().monitorScreen.material != replacePcOSMat)
+                                {
+                                    //hitted.transform.gameObject.GetComponentInChildren<Camera>().targetTexture = pcOSTex;
+                                    //hitted.transform.gameObject.GetComponentInChildren<Camera>().targetTexture = null;
+                                    hitted.transform.gameObject.GetComponentInChildren<Camera>().targetDisplay = 0;
+                                    */
+                                //hitted.transform.GetComponent<computerMonitor>().currPCOS = hitted.transform.gameObject.GetComponentInChildren<Camera>();
+                                isOnPCOS = true;
+                                Cursor.visible = true;
+                                Cursor.lockState = CursorLockMode.None;
+                                hitted.transform.GetComponent<computerMonitor>().monitorCam.targetTexture = null;
+                                hitted.transform.GetComponent<computerMonitor>().monitorCam.targetDisplay = 0;
+
+                                Debug.Log("entered to os!");
+                            }
+                        }
+
+
+                    }
+                }
+
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitted, pickupRange, objLayer))
+                {
+                    if (hitted.transform.gameObject.GetComponentInParent<DiskDrive>() != null)
+                    {
+                        hitted.transform.gameObject.GetComponentInParent<DiskDrive>().diskDriveOpened = !hitted.transform.gameObject.GetComponentInParent<DiskDrive>().diskDriveOpened;
+                        UnityEngine.Debug.Log("disk drive activatateted");
+                    }
+
+                    else if (hitted.transform.gameObject.GetComponentInParent<computerCase>() != null)
+                    {
+                        if (hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON)
+                        {
+                            hitted.transform.gameObject.GetComponentInParent<computerCase>().shutdownPc();
+                        }
+                        else
+                        {
+                            if (hitted.transform.gameObject.GetComponentInParent<computerCase>().hasMOBO)
+                            {
+                                if (hitted.transform.gameObject.GetComponentInParent<computerCase>().hasCPU)
+                                {
+                                    if (hitted.transform.gameObject.GetComponentInParent<computerCase>().hasPowerSupply)
+                                    {
+                                        if (!hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON)
+                                        {
+
+                                            hitted.transform.gameObject.GetComponentInParent<computerCase>().isPcON = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        StartCoroutine(main.setErrorMessage("Can't turn on the PC without a Power Supply!"));
+                                        Debug.Log("Can't turn on the PC without a Power Supply!");
+                                    }
+                                }
+                                else
+                                {
+                                    StartCoroutine(main.setErrorMessage("Can't turn on the PC without a CPU!"));
+                                    Debug.Log("Can't turn on the PC without a CPU!");
+                                }
+                            }
+                            else
+                            {
+                                StartCoroutine(main.setErrorMessage("Can't turn on the PC without a Motherboard!"));
+                                Debug.Log("Can't turn on the PC without a Motherboard!");
+                            }
+                        }
+                    }
+
+                }
+            }
+
+
+            if (GameControls.inLinkMode)
+            {
+                if (linkmode)
+                {
+                    linkmode = false;
+                    linkStep = 0;
+                    StartCoroutine(main.setInfoMessage("Link Mode deactivated."));
+                }
+                else
+                {
+                    linkmode = true;
+                    StartCoroutine(main.setInfoMessage("Link Mode activated.\nChoose a computer."));
+                }
+
+
+            }
+
+
+            if (GameControls.inDisarmMode)
+            {
+                if (disarmMode)
+                {
+                    disarmMode = false;
+                    StartCoroutine(main.setInfoMessage("Disarm Mode deactivated."));
+                }
+                else
+                {
+                    StartCoroutine(main.setInfoMessage("Disarm Mode activated."));
+                    disarmMode = true;
+                }
+            }
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
 
+
+        if (GameControls.inRotationMode)
             canRotate = true;
-        }
-        if (Input.GetKeyUp(KeyCode.F))
+        else
             canRotate = false;
 
         if (disarmMode)
@@ -528,20 +521,26 @@ public class pickupController : MonoBehaviour
 
 
 
-        float mousewheel = Input.GetAxis("Mouse ScrollWheel");
+        //float mousewheel = Input.GetAxis("Mouse ScrollWheel");
+        float mousewheel = GameControls.mouseWheel.y;
+        if (GameControls.inWheelDown)
+            mousewheel = -1f;
+        if (GameControls.inWheelUp)
+            mousewheel = 1f;
+            
         if (mousewheel > 0)
         {
 
-            followPoint.position += transform.forward * 0.25f;
+            followPoint.position += transform.forward * 0.2f;
 
         }
         if (mousewheel < 0)
         {
-            followPoint.position -= transform.forward * 0.25f;
+            followPoint.position -= transform.forward * 0.2f;
 
         }
 
-        if (pickedObject)
+        if (pickedObject && !linkmode)
         {
             if (hitted.transform.gameObject != null)
                 PickupObject(hitted.transform.gameObject);

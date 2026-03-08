@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerControls",
     "maps": [
         {
@@ -36,7 +37,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -60,9 +61,63 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Secondary",
+                    "name": "DisarmMode",
                     "type": "Button",
-                    "id": "c7e94bd0-4239-4366-8ec0-568ffb33e989",
+                    "id": "a51d464f-8361-4e37-a556-ea485359141a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LinkMode",
+                    "type": "Button",
+                    "id": "bb75390b-c6e3-4196-bdee-018cdac5b910",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "801a19cd-97c9-4d67-a362-2ea8120cf060",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotationMode",
+                    "type": "Button",
+                    "id": "1c90872d-3ba6-4c16-b5eb-6dd49f2d460d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "5cb22024-b420-4c6b-aecf-a21e2a7bab97",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ScrollUp",
+                    "type": "Button",
+                    "id": "d3598b8c-66e8-4f0f-aab9-a898d45d9858",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ScrollDown",
+                    "type": "Button",
+                    "id": "aa9eb3e5-30ea-4e5c-bc16-05ba5b05d496",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -207,18 +262,7 @@
                     "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=15,y=15)",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "72aa987c-9970-4e2b-b254-2f96742f5c35",
-                    "path": "<XInputController>/rightStick",
-                    "interactions": "",
-                    "processors": "ScaleVector2(x=15,y=15)",
+                    "processors": "ScaleVector2(x=8,y=10)",
                     "groups": ";Gamepad",
                     "action": "Look",
                     "isComposite": false,
@@ -347,12 +391,133 @@
                 },
                 {
                     "name": "",
-                    "id": "14a41737-4c93-45ef-b367-abc52faaeef0",
+                    "id": "210370d3-f78a-4f1d-a8ab-7d24919b754e",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Primary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33e13462-ac04-400e-acd7-58a2ee3ff25e",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DisarmMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f17cf20-3b40-430e-a164-c727bf0f0eaf",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DisarmMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fede79a-2a6b-4118-9680-a8ac539d444a",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LinkMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f72ad6f-4873-4aa9-85a3-22b4f74f2815",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LinkMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6f33e80-c5ca-41eb-b0f8-262ee6c9c4ea",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
+                    "groups": "",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ff1ec62-4cdf-4285-aaf3-278f4fc99d29",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28528380-cf75-4f96-8989-9be97fdf1980",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotationMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23b998b9-5faa-49c0-9999-80fe067d22d4",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotationMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8b9011d-298d-4b0c-a8e3-d89c5956b9b3",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Secondary",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6bcdb74f-c5ec-4fb9-a2e0-d9d2dc60b32a",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ScrollUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "631238b7-aedf-4d82-b1e9-86e4c9bcc1e0",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ScrollDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

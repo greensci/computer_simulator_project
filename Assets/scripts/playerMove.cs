@@ -52,14 +52,14 @@ public class playerMove : MonoBehaviour
         }
         else
             isMovingVelocity = false;
-        if (Input.GetKeyDown(KeyCode.L))
+      /*  if (Input.GetKeyDown(KeyCode.L))
         {
             main.saveProgress();
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
             main.loadProgress();
-        }
+        }*/
 
         if (!pickupController.isOnPCOS)
         {
